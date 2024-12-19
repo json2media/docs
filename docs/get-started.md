@@ -1,15 +1,15 @@
 ---
 sidebar_position: 1
-id: getting-started
-title: Getting Started
+id: get-started
+title: Get Started
 last_update: 
     date: 2024-12-18
     author: Rahul Verma
 tags:
-  - getting-started
+  - get-started
 ---
 
-# Getting Started
+# Get Started
 
 Welcome to Json2Media! Follow these steps to begin:
 
