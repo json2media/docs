@@ -3,10 +3,11 @@ import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
+const siteGitHubUrl = 'https://github.com/json2media/docs';
 
 const config: Config = {
-  title: 'Json2Media',
-  tagline: 'Create, customize, and control AI assistants without being tied to a single LLM provider.',
+  title: 'Welcome to Json2Media Documentation',
+  tagline: 'Your guide to creating and managing custom AI assistants.',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
@@ -15,51 +16,92 @@ const config: Config = {
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/',
 
-  // GitHub pages deployment config.
-  // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'Json2Media', // Usually your GitHub org/user name.
-  projectName: 'docs', // Usually your repo name.
+  customFields: {
+    siteGitHubUrl: siteGitHubUrl,
+    recentBlogPostsOnHomePage: 5
+  },
+
+  organizationName: 'Json2Media',
+  projectName: 'docs',
 
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
   trailingSlash: false,
   deploymentBranch: "gh-pages",
-  // Even if you don't use internationalization, you can use this field to set
-  // useful metadata like html lang. For example, if your site is Chinese, you
-  // may want to replace "en" with "zh-Hans".
   i18n: {
     defaultLocale: 'en',
     locales: ['en'],
   },
-
+  plugins: [
+    [
+      './plugins/blog-plugin/blog-plugin.js',
+      {
+        id: 'recent_blogs',
+        blogTitle: 'Json2Media Blog',
+        blogDescription: 'Blog',
+        include: ['**/*.{md,mdx}'],
+        exclude: [
+          '**/_*.{js,jsx,ts,tsx,md,mdx}',
+          '**/_*/**',
+          '**/*.test.{js,jsx,ts,tsx}',
+          '**/__tests__/**',
+        ],
+        showReadingTime: true,
+        showLastUpdateTime: true,
+        showLastUpdateAuthor: false,
+        onUntruncatedBlogPosts: 'throw',
+        onInlineAuthors: 'warn',
+        // Remove this to remove the "edit this page" links.
+        editUrl: `${siteGitHubUrl}/edit/main/`,
+      },
+    ]
+  ],
   presets: [
     [
       'classic',
       {
+        pages: {
+          showLastUpdateTime: true,
+          showLastUpdateAuthor: true,
+        },
         docs: {
           sidebarPath: './sidebars.ts',
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
+          showLastUpdateTime: true,
+          showLastUpdateAuthor: true,
           editUrl:
             'https://github.com/json2media/docs/tree/main/packages/create-docusaurus/templates/shared/',
         },
         blog: {
-          showReadingTime: true,
+          blogSidebarTitle: 'All posts',
+          blogSidebarCount: 'ALL',
+          showReadingTime: true,          
+          readingTime: ({content, frontMatter, defaultReadingTime}) =>
+            defaultReadingTime({content, options: {wordsPerMinute: 300}}),
           feedOptions: {
             type: ['rss', 'atom'],
             xslt: true,
           },
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
           editUrl:
             'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
           // Useful options to enforce blogging best practices
           onInlineTags: 'warn',
           onInlineAuthors: 'warn',
-          onUntruncatedBlogPosts: 'warn',
+          onUntruncatedBlogPosts: 'throw',
         },
         theme: {
           customCss: './src/css/custom.css',
+        },
+        sitemap: {
+          lastmod: 'date',
+          changefreq: 'weekly',
+          priority: 0.5,
+          ignorePatterns: ['/tags/**'],
+          filename: 'sitemap.xml',
+          createSitemapItems: async (params) => {
+            const {defaultCreateSitemapItems, ...rest} = params;
+            const items = await defaultCreateSitemapItems(rest);
+            return items.filter((item) => !item.url.includes('/page/'));
+          },
         },
       } satisfies Preset.Options,
     ],
@@ -67,21 +109,17 @@ const config: Config = {
 
   themeConfig: {
     // Replace with your project's social card
-    image: 'img/docusaurus-social-card.jpg',
+    image: 'img/json2media-dark.png',
     navbar: {
-      title: 'Json2Media',
+      title: 'Json2Media Docs',
       logo: {
         alt: 'Json2Media Logo',
         src: 'img/logo.svg',
       },
       items: [
-        {
-          type: 'docSidebar',
-          sidebarId: 'tutorialSidebar',
-          position: 'left',
-          label: 'Tutorial',
-        },
-        {to: '/blog', label: 'Blog', position: 'left'},
+        { type: 'doc', docId: 'getting-started', position: 'left', label: 'Getting Started' },
+        // { to: '/blog', label: 'Blog', position: 'left' },
+        { to: '/docs/feedback-support', label: 'Support', position: 'right' },
         {
           href: 'https://github.com/json2media',
           label: 'GitHub',
@@ -96,8 +134,8 @@ const config: Config = {
           title: 'Docs',
           items: [
             {
-              label: 'Tutorial',
-              to: '/docs/intro',
+              label: 'Getting Started',
+              to: '/docs/getting-started',
             },
           ],
         },
@@ -117,14 +155,18 @@ const config: Config = {
         {
           title: 'More',
           items: [
-            {
-              label: 'Blog',
-              to: '/blog',
-            },
+            // {
+            //   label: 'Blog',
+            //   to: '/blog',
+            // },
             {
               label: 'GitHub',
               href: 'https://github.com/json2media',
             },
+            {
+              label: 'Sitemap',
+              href: '/sitemap.xml'
+            }
           ],
         },
       ],
