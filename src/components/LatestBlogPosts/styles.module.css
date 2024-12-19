@@ -1,0 +1,31 @@
+.blogTag {
+    background: #f5f5f5;
+    color: #333;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin-top: 5px;
+    display: inline-block;
+  }
+  
+  .blogCard {
+    padding: 1.5rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease-in-out;
+  }
+  
+  .blogCard:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .features {
+    padding: 2rem 0;
+  }
+  
+  .latestBlogs {
+    padding: 2rem 0;
+  }
+  

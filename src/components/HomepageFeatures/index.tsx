@@ -1,51 +1,57 @@
 import clsx from 'clsx';
 import Heading from '@theme/Heading';
+import { Icon } from '@iconify/react';
 import styles from './styles.module.css';
 
 type FeatureItem = {
   title: string;
-  Svg: React.ComponentType<React.ComponentProps<'svg'>>;
+  icon: string;
+  width: string;
+  height: string;
   description: JSX.Element;
 };
 
 const FeatureList: FeatureItem[] = [
   {
-    title: 'Easy to Use',
-    Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
+    title: 'Comprehensive Guides',
+    icon: 'ion:book-outline',
+    width: '48',
+    height: '48',
     description: (
       <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
+        Access detailed documentation to learn how to create, customize, and manage your assistants effectively.
       </>
     ),
   },
   {
-    title: 'Focus on What Matters',
-    Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
+    title: 'Frequent Updates',
+    icon: 'fluent:arrow-repeat-all-24-filled',
+    width: '48',
+    height: '48',
     description: (
       <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
+        Stay updated with the latest features and improvements through our regularly updated docs.
       </>
     ),
   },
   {
-    title: 'Powered by React',
-    Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
+    title: 'Your Feedback Matters',
+    icon: 'mynaui:chat-dots',
+    width: '48',
+    height: '48',
     description: (
       <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
+        We listen to your feedback to enhance the platform and provide the best user experience.
       </>
     ),
   },
 ];
 
-function Feature({title, Svg, description}: FeatureItem) {
+function Feature({ title, icon, width, height, description }: FeatureItem) {
   return (
-    <div className={clsx('col col--4')}>
+    <div className={clsx('col col--4 padding-vert--md')}>
       <div className="text--center">
-        <Svg className={styles.featureSvg} role="img" />
+        <Icon icon={icon} width={width} height={height} />
       </div>
       <div className="text--center padding-horiz--md">
         <Heading as="h3">{title}</Heading>
