@@ -117,7 +117,7 @@ const config: Config = {
         src: 'img/logo.svg',
       },
       items: [
-        { type: 'doc', docId: 'getting-started', position: 'left', label: 'Getting Started' },
+        { type: 'doc', docId: 'get-started', position: 'left', label: 'Get Started' },
         // { to: '/blog', label: 'Blog', position: 'left' },
         { to: '/docs/feedback-support', label: 'Support', position: 'right' },
         {
@@ -134,8 +134,8 @@ const config: Config = {
           title: 'Docs',
           items: [
             {
-              label: 'Getting Started',
-              to: '/docs/getting-started',
+              label: 'Get Started',
+              to: '/docs/get-started',
             },
           ],
         },
